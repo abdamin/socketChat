@@ -3,6 +3,9 @@ const chatMessages = document.querySelector(".chat-messages");
 const userList = document.getElementById("users");
 const roomName = document.getElementById("room-name");
 
+//notification sound
+const notifAudio = new Audio("/sounds/messenger.mp3");
+
 //Get username and room from URL
 const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true
@@ -52,6 +55,10 @@ const outputMessage = message => {
     </p>`;
 
   chatMessages.appendChild(div);
+
+  if (username !== message.username) {
+    notifAudio.play();
+  }
 };
 
 //Add room name to dom
